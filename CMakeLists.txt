@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.31)
+
+if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+    set(CMAKE_CUDA_ARCHITECTURES 86)
+endif()
+
 project(gpu_2026 CUDA CXX)
 
 set(CMAKE_CUDA_STANDARD 17)
@@ -10,8 +15,7 @@ set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
 
 set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
 
-if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
-    set(CMAKE_CUDA_ARCHITECTURES 86)
-endif()
+set(OpenMP_RUNTIME_MSVC experimental)
+find_package(OpenMP REQUIRED)
 
 add_subdirectory(tasks)
