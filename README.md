@@ -29,9 +29,12 @@ build\tasks\lab_1\lab_1.exe
 
 Для готового Softmax на GPU можно подключить NVIDIA cuDNN для CUDA 12. Указать папку cuDNN с `include` и `lib` при настройке CMake через `-DCUDNN_ROOT=C:/path/to/cudnn` и добавить её папку `bin` в `PATH` перед запуском. В CSV появятся строки с `impl=cudnn`. [Установка cuDNN на Windows](https://docs.nvidia.com/deeplearning/cudnn/installation/latest/windows.html)
 
+Для Matmul собрать `cmake --build build --target lab_2` и запустить `build\tasks\lab_2\lab_2.exe`. Для быстрого запуска передать максимальный размер, например `lab_2.exe 512`.
+
 ## Отчёты
 
 - [Лабораторная работа 1. Softmax](docs/lab_1/README.md)
+- [Лабораторная работа 2. Matmul](docs/lab_2/README.md)
 
 # Задачи
 
@@ -156,6 +159,7 @@ Softmax рассматривается построчно. Для матрицы
   - naive kernel;
   - shared memory;
   - register blocking.
+- cuBLAS (SGEMM).
 
 ## 5. Лабораторная работа 3
 
