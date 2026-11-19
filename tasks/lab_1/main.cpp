@@ -10,6 +10,10 @@
 #include "omp_simd/omp_simd_softmax.h"
 #include "cuda/cuda_softmax.h"
 
+#ifdef LAB1_USE_CUDNN
+#include "cudnn/cudnn_softmax.h"
+#endif
+
 namespace {
 
     constexpr int kWarmupRuns = 3;
@@ -152,6 +156,12 @@ int main() {
         const std::string name = "omp" + std::to_string(threads);
         benchmark("scaling", name.c_str(), omp, naive_cpu, kSizesScaling);
     }
+
+#ifdef LAB1_USE_CUDNN
+    CudnnSoftmax cudnnSoftmax;
+    benchmark("fixed_M", "cudnn", cudnnSoftmax, naive_cpu, kSizesFixedRows);
+    benchmark("fixed_N", "cudnn", cudnnSoftmax, naive_cpu, kSizesFixedCols);
+#endif
 
     return 0;
 }
